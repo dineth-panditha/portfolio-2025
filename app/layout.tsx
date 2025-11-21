@@ -22,8 +22,7 @@ const jetbrainsMono = JetBrains_Mono({
 // 2. Metadata (Updated Title & Favicon)
 export const metadata: Metadata = {
   title: "Dineth Panditha | Full Stack Engineer", 
-  description: "Building scalable web, mobile, and blockchain applications.",
-  // UPDATED: This sets your avatar as the address bar icon
+  description: "Building scalable AI-driven web, mobile, and blockchain solutions.",
   icons: {
     icon: "/images/avatar.png",
     shortcut: "/images/avatar.png",
