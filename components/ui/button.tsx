@@ -6,7 +6,8 @@ import { ReactNode } from "react";
 
 interface ButtonProps {
   children: ReactNode;
-  onClick?: () => void;
+  // FIXED: Updated to allow the MouseEvent argument
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   variant?: "primary" | "outline" | "ghost";
   className?: string;
   icon?: ReactNode;
