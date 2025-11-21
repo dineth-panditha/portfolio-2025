@@ -14,6 +14,7 @@ import {
   Terminal 
 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { PROFILE } from "@/lib/constants"; // Import Profile
 
 export default function CommandPalette() {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,7 +28,6 @@ export default function CommandPalette() {
         e.preventDefault();
         setIsOpen((prev) => !prev);
       }
-      // Close on Escape
       if (e.key === "Escape") {
         setIsOpen(false);
       }
@@ -72,7 +72,8 @@ export default function CommandPalette() {
       label: "Copy_Email_Address",
       icon: <Copy size={16} />,
       action: () => {
-        navigator.clipboard.writeText("your-email@example.com");
+        // UPDATED: Uses real email from constants
+        navigator.clipboard.writeText(PROFILE.email);
         alert("Email copied to clipboard");
       },
       group: "Utility"
@@ -81,14 +82,14 @@ export default function CommandPalette() {
       id: "github",
       label: "Connect_GitHub",
       icon: <Github size={16} />,
-      action: () => window.open("https://github.com", "_blank"),
+      action: () => window.open(PROFILE.links.github, "_blank"),
       group: "External"
     },
     {
       id: "linkedin",
       label: "Connect_LinkedIn",
       icon: <Linkedin size={16} />,
-      action: () => window.open("https://linkedin.com", "_blank"),
+      action: () => window.open(PROFILE.links.linkedin, "_blank"),
       group: "External"
     },
   ];
@@ -111,7 +112,6 @@ export default function CommandPalette() {
             className="fixed inset-0 z-[10000] flex items-start justify-center pt-[20vh] px-4"
             onClick={() => setIsOpen(false)}
         >
-          {/* Backdrop */}
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -119,7 +119,6 @@ export default function CommandPalette() {
             className="absolute inset-0 bg-black/80 backdrop-blur-sm"
           />
 
-          {/* Palette Window */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95, y: -20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -128,7 +127,6 @@ export default function CommandPalette() {
             className="relative w-full max-w-lg bg-zinc-900 border border-white/10 rounded-xl shadow-2xl overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Input Header */}
             <div className="flex items-center px-4 py-4 border-b border-white/10">
                 <Search className="text-muted mr-3" size={20} />
                 <input 
@@ -144,11 +142,9 @@ export default function CommandPalette() {
                 </div>
             </div>
 
-            {/* Command List */}
             <div className="py-2 max-h-[300px] overflow-y-auto">
                 {filteredCommands.length === 0 ? (
                     <div className="px-4 py-8 text-center text-muted font-mono text-sm">
-                        {/* FIXED: Escaped the > symbol here */}
                         &gt; Error: Command_Not_Found
                     </div>
                 ) : (
@@ -168,7 +164,6 @@ export default function CommandPalette() {
                 )}
             </div>
 
-            {/* Footer */}
             <div className="px-4 py-2 bg-white/5 border-t border-white/5 flex justify-between items-center">
                 <span className="text-[10px] text-zinc-600 font-mono">Ethereal_OS v4.0</span>
                 <span className="text-[10px] text-zinc-600 font-mono">Use ↑↓ to navigate</span>
